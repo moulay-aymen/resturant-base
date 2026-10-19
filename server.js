@@ -8,7 +8,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-const DB_FILE = './database.json';
+const DB_FILE = process.env.DB_FILE || './database.json';
 
 // Helper function to read data from local file
 const readData = () => {
