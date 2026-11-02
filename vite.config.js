@@ -11,6 +11,8 @@ export default defineConfig({
     watch: {
       // Ignore database.json so Vite doesn't refresh the browser when orders are saved
       ignored: ['**/database.json']
-    }
+    },
+    proxy: { '/api': 'http://localhost:5000' },
+    watch: { ignored: ['**/database.json'] }
   }
 })
