@@ -4,6 +4,11 @@ import fs from 'fs';
 
 const app = express();
 const PORT = 5000;
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
