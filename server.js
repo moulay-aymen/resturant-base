@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const DB_FILE = process.env.DB_FILE || './database.json';
+const DB_FILE = path.join(__dirname, 'database.json');
 
 // Helper function to read data from local file
 const readData = () => {
@@ -117,7 +117,13 @@ app.delete('/api/orders/:id', (req, res) => {
   writeData(db);
   res.json({ success: true });
 });
+// Serve the built React app
+app.use(express.static(path.join(__dirname, 'dist')));
 
+// Express 5 syntax (app.get('*') no longer works in Express 5)
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 // Start Local Server
 app.listen(PORT, () => {
   console.log(`✅ Local Restaurant Backend is running at: http://localhost:${PORT}`);
